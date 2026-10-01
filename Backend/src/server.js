@@ -2,7 +2,7 @@ require("dotenv").config();
 const http = require("http");
 const { Server } = require("socket.io");
 const app = require("./app");
-
+const cors = require("cors");
 const { connectDB } = require("./configs/database.config");
 
 // 3. Import file quản lý socket
@@ -18,6 +18,13 @@ const PORT = process.env.PORT || 8000;
 // Khởi tạo server HTTP bọc lấy app Express
 const server = http.createServer(app);
 
+
+
+app.use(cors({
+  origin: "*", 
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 // Gắn Socket.io vào server HTTP vừa tạo
 const io = new Server(server, {
   cors: {
