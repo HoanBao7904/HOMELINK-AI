@@ -1,1 +1,8 @@
-pip freeze > requirements.txt
+fastapi
+uvicorn
+langchain
+faiss-cpu
+google-generativeai
+python-dotenv
+pydantic
+requests
