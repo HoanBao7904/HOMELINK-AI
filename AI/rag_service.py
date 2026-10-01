@@ -3,10 +3,9 @@
 import os
 import numpy as np
 import faiss
-from google import genai
+import google.generativeai as genai
 from dotenv import load_dotenv
 from prompt_template import SYSTEM_PROMPT
-
 # 1. Khởi tạo và kết nối API
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
