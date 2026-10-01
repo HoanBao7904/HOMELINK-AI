@@ -66,7 +66,7 @@ const requestPinReset = async (email, qrCode = null) => {
   // await repo.saveResetToken(user.id, token, expiresAt);
 
   // 4. Tạo link reset PIN
-  const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-pin?token=${token}&qrCode=${qr.qr_code}&type=${qrType}`;
+  const resetLink = `${'https://homelink-xi.vercel.app/'}/reset-pin?token=${token}&qrCode=${qr.qr_code}&type=${qrType}`;
 
   // 5. Gửi email
 const html = `
