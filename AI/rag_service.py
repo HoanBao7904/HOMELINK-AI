@@ -3,7 +3,7 @@
 import os
 import numpy as np
 import faiss
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 from prompt_template import SYSTEM_PROMPT
 # 1. Khởi tạo và kết nối API
