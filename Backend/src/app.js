@@ -86,7 +86,12 @@ const app = express();
 // CORS
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:5173"],
+    origin: [
+      "http://localhost:3000", 
+      "http://localhost:5173", 
+      "https://homelink-gcuq6t5sp-hbs-projects-2aac4fea.vercel.app", // Thêm domain Vercel hiện tại của bạn vào đây
+      /\.vercel\.app$/ // Hoặc dùng Regex này để cho phép tự động tất cả các subdomain của Vercel
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
