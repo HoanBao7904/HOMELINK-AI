@@ -2,7 +2,7 @@
 const crypto = require('crypto');
 const repo = require('./pin-reset.repository');
 const { sendEmail } = require('../../configs/email.config');
-
+require('dotenv').config();
 // Tạo mã PIN ngẫu nhiên 4 số
 const generateRandomPin = () => {
   return Math.floor(1000 + Math.random() * 9000).toString();
@@ -66,8 +66,7 @@ const requestPinReset = async (email, qrCode = null) => {
   // await repo.saveResetToken(user.id, token, expiresAt);
 
   // 4. Tạo link reset PIN
-  const resetLink = `${'https://homelink-xi.vercel.app/'}/reset-pin?token=${token}&qrCode=${qr.qr_code}&type=${qrType}`;
-
+const resetLink = `${process.env.FRONTEND_URL}/reset-pin?token=${token}&qrCode=${encodeURIComponent(qr.qr_code)}&type=${qrType}`;
   // 5. Gửi email
 const html = `
   <!DOCTYPE html>

@@ -1,4 +1,3 @@
-
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -9,6 +8,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+transporter.verify((error) => {
+  if (error) {
+    console.error('❌ Email transporter error:', error);
+  } else {
+    console.log('✅ Email transporter ready');
+  }
+});
+
 const sendEmail = async (to, subject, html) => {
   try {
     const info = await transporter.sendMail({
@@ -17,12 +24,20 @@ const sendEmail = async (to, subject, html) => {
       subject,
       html,
     });
-    console.log('Email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
-  } catch (error) {
-    console.error('Email error:', error);
-    return { success: false, error: error.message };
-  }
-}
 
-module.exports = { sendEmail };// configs/email.config.js
+    console.log('✅ Email sent:', info.messageId);
+
+    return {
+      success: true,
+      messageId: info.messageId,
+    };
+  } catch (error) {
+    console.error('❌ Email error:', error);
+
+    throw new Error(`Không thể gửi email: ${error.message}`);
+  }
+};
+
+module.exports = {
+  sendEmail,
+};
