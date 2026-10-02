@@ -11,6 +11,13 @@ import type { ErrorResponseApi } from 'src/types/utils.type'
 import { loginSchema, type LoginFormData } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 
+const DEMO_ACCOUNTS = [
+  { role: 'Cư dân', username: 'hoanbao', password: '123456789' },
+  { role: 'Bảo vệ', username: 'baove1', password: '123456' },
+  { role: 'Nhân viên', username: 'nhanvien1', password: '123456' },
+  { role: 'Admin', username: 'admin1', password: '123456' }
+]
+
 export default function Login() {
   const { SetIsAuthenticated, setUser } = useContext(AppContext)
 
@@ -18,6 +25,7 @@ export default function Login() {
   const {
     handleSubmit,
     setError,
+    setValue,
     register,
     formState: { errors }
   } = useForm<LoginFormData>({
@@ -130,6 +138,31 @@ export default function Login() {
               <h3 className='text-3xl font-[Manrope] font-bold text-[#071e27] tracking-tight'>Đăng nhập</h3>
               <p className='text-[#071e27]/50 text-sm'>Nhập thông tin đăng nhập hoặc sử dụng mã thẻ cư dân.</p>
             </div>
+
+            {/* Tài khoản demo */}
+            <details open className='rounded-xl border border-dashed border-[#006876]/40 bg-[#e6f6ff]/60 p-4'>
+              <summary className='cursor-pointer text-xs font-bold uppercase tracking-widest text-[#006876]'>
+                Tài khoản demo (bấm để điền sẵn)
+              </summary>
+              <div className='mt-3 grid grid-cols-2 gap-2'>
+                {DEMO_ACCOUNTS.map((acc) => (
+                  <button
+                    key={acc.username}
+                    type='button'
+                    onClick={() => {
+                      setValue('username', acc.username, { shouldValidate: true })
+                      setValue('password', acc.password, { shouldValidate: true })
+                    }}
+                    className='rounded-lg bg-white px-3 py-2 text-left text-sm shadow-sm transition-all hover:bg-[#c8f1ff] active:scale-[0.98]'
+                  >
+                    <span className='block font-semibold text-[#071e27]'>{acc.role}</span>
+                    <span className='block text-xs text-[#071e27]/50'>
+                      {acc.username} / {acc.password}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </details>
 
             {/* Các trường nhập liệu */}
             <div className='space-y-5'>
