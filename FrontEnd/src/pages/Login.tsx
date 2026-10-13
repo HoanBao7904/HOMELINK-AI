@@ -12,7 +12,7 @@ import { loginSchema, type LoginFormData } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 
 const DEMO_ACCOUNTS = [
-  { role: 'Cư dân', username: 'hoanbao', password: '123456789' },
+  { role: 'Cư dân', username: 'hoanbao', password: '123456' },
   { role: 'Bảo vệ', username: 'baove1', password: '123456' },
   { role: 'Nhân viên', username: 'nhanvien1', password: '123456' },
   { role: 'Admin', username: 'admin1', password: '123456' }
